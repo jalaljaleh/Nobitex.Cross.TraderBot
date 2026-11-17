@@ -26,8 +26,8 @@ public static class Program
     public static async Task<int> Main(string[] args)
     {
 
-        Environment.SetEnvironmentVariable("NOBITEX_API_KEY_PUBLIC", "sZ1bpCC-hvLp8F4zRSFeISy2L6CZ469RQGLxJLlcTvo=");
-        Environment.SetEnvironmentVariable("NOBITEX_API_KEY_SECRET", "lnKNcoZlFVW9LIopPes1NwmvW6IV9LMfiuiBy2W0BJg=");
+        Environment.SetEnvironmentVariable("NOBITEX_API_KEY_PUBLIC", "Your_public_Token");
+        Environment.SetEnvironmentVariable("NOBITEX_API_KEY_SECRET", "Your_secret_Token");
         Environment.SetEnvironmentVariable(LiveGuardVariable, "1");
 
         var settings = CommandLine.Parse(args);
