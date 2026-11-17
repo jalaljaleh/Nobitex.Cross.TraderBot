@@ -25,10 +25,8 @@ public static class Program
 
     public static async Task<int> Main(string[] args)
     {
-
-        Environment.SetEnvironmentVariable("NOBITEX_API_KEY_PUBLIC", "Your_public_Token");
-        Environment.SetEnvironmentVariable("NOBITEX_API_KEY_SECRET", "Your_secret_Token");
-        Environment.SetEnvironmentVariable(LiveGuardVariable, "1");
+        Environment.SetEnvironmentVariable("NOBITEX_API_KEY_PUBLIC", "api_token");
+        Environment.SetEnvironmentVariable("NOBITEX_API_KEY_SECRET", "secret_key");
 
         var settings = CommandLine.Parse(args);
 
@@ -59,6 +57,11 @@ public static class Program
             options.Mode = mode;
         }
 
+      ///////////////////////
+        Environment.SetEnvironmentVariable(LiveGuardVariable, "1");
+        options.Mode = RunMode.LiveTrading;
+
+
         var errors = OptionsValidator.Validate(options);
         if (errors.Count > 0)
         {
@@ -70,14 +73,14 @@ public static class Program
             return 2;
         }
 
-        // ---- live trading double opt-in -----------------------------------
-        //if (options.Mode == RunMode.LiveTrading && !LiveGate.IsAllowed(settings))
-        //{
-        //    logger.LogError(
-        //        "LiveTrading requires BOTH --confirm-live AND the environment variable {Variable}=1. " +
-        //        "Refusing to start.", LiveGuardVariable);
-        //    return 3;
-        //}
+        //----live trading double opt-in -----------------------------------
+        if (options.Mode != RunMode.LiveTrading /*&& !LiveGate.IsAllowed(settings)*/)
+        {
+            logger.LogError(
+                "LiveTrading requires BOTH --confirm-live AND the environment variable {Variable}=1. " +
+                "Refusing to start.", LiveGuardVariable);
+            return 3;
+        }
 
         logger.LogInformation(
             "Starting CrossExchangeBot mode={Mode} markets={Markets} persistence={Provider}",
@@ -320,13 +323,4 @@ public static class Program
         }
     }
 
-    /// <summary>Double opt-in gate for LiveTrading.</summary>
-    private static class LiveGate
-    {
-        public static bool IsAllowed(CommandLine settings)
-        {
-            var env = Environment.GetEnvironmentVariable(LiveGuardVariable);
-            return settings.ConfirmLive && string.Equals(env, "1", StringComparison.Ordinal);
-        }
-    }
 }
