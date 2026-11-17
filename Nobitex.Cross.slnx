@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="../jalaljaleh/Nobitex.Net/Nobitex.Net/Nobitex.Net.csproj" Id="7191bbfb-1f66-40e7-befe-1056a83713fa" />
+  <Project Path="../MarketFeed.Net/MarketFeed.Net/MarketFeed.Net.csproj" />
   <Project Path="Nobitex.Cross.Bot/Nobitex.Cross.Bot.csproj" />
 </Solution>
