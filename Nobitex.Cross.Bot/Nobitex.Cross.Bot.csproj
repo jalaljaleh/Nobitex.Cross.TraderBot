@@ -22,6 +22,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\jalaljaleh\Nobitex.Net\Nobitex.Net\Nobitex.Net.csproj" />
+	  <ProjectReference Include="..\..\MarketFeed.Net\MarketFeed.Net\MarketFeed.Net.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
